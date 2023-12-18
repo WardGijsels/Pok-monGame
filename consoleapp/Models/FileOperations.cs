@@ -7,8 +7,9 @@ namespace consoleapp.Models
     {
         // Attr
         public static string BestandPokémon = "pokémonlijst.txt";
+        public static string BestandTrainers = "trainers.txt";
 
-
+        // Pokémon inlezen
         public static List<Pokémon> LeesPokémon()
         {
             List<Pokémon> pokémonlijst = new List<Pokémon>();
@@ -35,6 +36,33 @@ namespace consoleapp.Models
             }
 
             return pokémonlijst;
+        }
+
+        // Trainers inlezen
+        public static List<Trainer> LeesTrainers()
+        {
+            List<Trainer> trainers = new List<Trainer>();
+
+            if (!File.Exists(BestandTrainers))
+            {
+                return trainers;
+            }
+
+            using (StreamReader reader = new StreamReader(BestandTrainers))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string record = reader.ReadLine();
+                    string[] data = record.Split('#');
+                    string naam = data[0];
+                    string pokémon = data[1];
+
+                    Trainer trainer = new Trainer(naam, pokémon);
+                    trainers.Add(trainer);
+                }
+            }
+
+            return trainers;
         }
     }
 }

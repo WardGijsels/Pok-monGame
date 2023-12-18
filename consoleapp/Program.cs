@@ -24,63 +24,31 @@ Console.WriteLine($"Je hebt {selectedPokemon.Naam} gekozen!");
 
 AsciiArtDrukken(selectedPokemon);
 
-string keuze = LeesStringMetOptie($"Tegen wie wil je vechten?(Red of Blue) ", new string[] { "R", "B" });
-if (keuze == "R")
+// Lijst van Trainers maken
+List<Trainer> trainerLijst = new List<Trainer>();
+trainerLijst = FileOperations.LeesTrainers();
+// Lijst van Trainers drukken
+Console.WriteLine(Environment.NewLine + "Kies een Trainer om tegen te vechten!" + Environment.NewLine);
+for (int i = 0; i < trainerLijst.Count; i++)
 {
-    Pokémon redPokémon = lijst[5];
-    Console.WriteLine("Red wants to battle!\nRed send out charizard");
-    Console.ForegroundColor = ConsoleColor.Red;
-    AsciiArtDrukken(redPokémon);
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.WriteLine("Wat wil je doen?");
-
-    string[] menu = new string[] { "Tackle", "Niks","Run Away"};
-    int battleoptie = KiesMenu(menu);
-
-    while (!(battleoptie == 3))
-    {
-        switch (battleoptie)
-        {
-            case 1:
-                Console.WriteLine($"{selectedPokemon.Naam} gebruikte tackle op {redPokémon.Naam}");
-                redPokémon.Tackle(redPokémon);
-                Console.WriteLine($"{redPokémon.Naam} heeft nu nog {redPokémon.Hp} HP");
-                break;
-            case 2:
-                break;
-        }
-
-        battleoptie = KiesMenu(menu);
-    }
+    Console.WriteLine($"{i}. {trainerLijst[i]}");
 }
-else
-{
-    Pokémon bluePokémon = lijst[8];
-    Console.WriteLine("Blue wants to battle!\nBlue send out Blastoise");
-    Console.ForegroundColor = ConsoleColor.Blue;
-    AsciiArtDrukken(bluePokémon);
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.WriteLine("Wat wil je doen?");
 
-    string[] menu = new string[] { "Tackle", "Niks", "Run Away" };
-    int battleoptie = KiesMenu(menu);
+// Kies een Trainer
+Console.WriteLine();
+int indexTrainer = LeesGetalMinMax($"Kies een Pokémon (van 0 tot {trainerLijst.Count - 1}): ", 0, trainerLijst.Count - 1);
 
-    while (!(battleoptie == 3))
-    {
-        switch (battleoptie)
-        {
-            case 1:
-                Console.WriteLine($"{selectedPokemon.Naam} gebruikte tackle op {bluePokémon.Naam}");
-                bluePokémon.Tackle(bluePokémon);
-                Console.WriteLine($"{bluePokémon.Naam} heeft nu nog {bluePokémon.Hp} HP");
-                break;
-            case 2:
-                break;
-        }
+// Zoek de geselecteerde pokémon in de lijst
+Trainer selectedTrainer = trainerLijst[indexTrainer];
+Console.WriteLine($"Je hebt {selectedTrainer.Naam} gekozen!");
 
-        battleoptie = KiesMenu(menu);
-    }
-}
+// Battle
+Battle(selectedTrainer);
+
+
+
+
+
 
 Console.ReadKey();
 // Methodes
@@ -102,6 +70,57 @@ void AsciiArtDrukken(Pokémon geselecteerdePokémon)
     // \r en \n bruikbaar maken
     string sprite = geselecteerdePokémon.Sprite.Replace("\\r", "\r").Replace("\\n", "\n");
     Console.WriteLine($"Sprite:{Environment.NewLine}{sprite}{Environment.NewLine}");
+}
+
+void Battle(Trainer trainer)
+{
+    Console.WriteLine($"{trainer.Naam} wants to battle!\n{trainer.Naam} sends out {trainer.Pokémon}!");
+
+    // Zoek de geselecteerde Pokémon van de trainer in de lijst
+    string trainerPokemonNaam = trainer.Pokémon;
+
+    // Zoek de Pokémon met dezelfde naam in de lijst
+    Pokémon trainerPokemon = lijst.Find(pokemon => pokemon.Naam == trainerPokemonNaam);
+
+    // Controleer of de Pokémon is gevonden
+    if (trainerPokemon != null)
+    {
+        // verdere acties toe met de trainerPokemon
+        AsciiArtDrukken(trainerPokemon);
+        BattleKeuzes(trainerPokemon);
+    }
+    else
+    {
+        Console.WriteLine($"ERROR: Pokémon met de naam '{trainerPokemonNaam}' niet gevonden in de lijst.");
+    }
+}
+
+void BattleKeuzes(Pokémon trainerPokémon)
+{
+    string[] menu = new string[] { "Fight", "Pokémon", "Item", "Run" };
+    int battleoptie = KiesMenu(menu);
+    while (!(battleoptie == 4))
+    {
+        switch (battleoptie)
+        {
+            case 1:
+                // TODO : Meer moves toevoegen
+                trainerPokémon.Tackle(trainerPokémon);
+                Console.WriteLine($"{trainerPokémon.Naam} Heeft nu {trainerPokémon.Hp} HP");
+                break;
+            case 2:
+                // TODO : Meerdere Pokémon voor de speler
+                break;
+            case 3:
+                // TODO : Item menu
+                break;
+            case 4:
+                Console.WriteLine("Je bent weg gelopen!");
+                break;
+        }
+        battleoptie = KiesMenu(menu);
+    }
+
 }
 
 

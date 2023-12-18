@@ -1,0 +1,3 @@
+Red#Charizard
+Blue#Blastoise
+Green#Venusaur

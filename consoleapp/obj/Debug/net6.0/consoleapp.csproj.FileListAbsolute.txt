@@ -28,3 +28,4 @@ C:\Users\PC\Desktop\Pokémon personal project\StarterBattle Pokémon\Pok-monGame
 C:\Users\PC\Desktop\Pokémon personal project\StarterBattle Pokémon\Pok-monGame\consoleapp\obj\Debug\net6.0\consoleapp.pdb
 C:\Users\PC\Desktop\Pokémon personal project\StarterBattle Pokémon\Pok-monGame\consoleapp\obj\Debug\net6.0\consoleapp.genruntimeconfig.cache
 C:\Users\PC\Desktop\Pokémon personal project\StarterBattle Pokémon\Pok-monGame\consoleapp\obj\Debug\net6.0\ref\consoleapp.dll
+C:\Users\PC\Desktop\Pokémon personal project\StarterBattle Pokémon\Pok-monGame\consoleapp\bin\Debug\net6.0\trainers.txt
