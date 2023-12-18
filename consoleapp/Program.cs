@@ -51,6 +51,7 @@ Battle(selectedTrainer);
 
 
 Console.ReadKey();
+
 // Methodes
 void TitleMenu()
 {
@@ -122,7 +123,6 @@ void BattleKeuzes(Pokémon trainerPokémon)
     }
 
 }
-
 
 // Hulp methodes
 string LeesStringNietLeeg(string vraag)

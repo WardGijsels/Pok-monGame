@@ -1,0 +1,13 @@
+Tackle#Normal#40#100
+Dizzy Punch#Normal#70#100
+Double-Edge#Normal#120#100
+Explosion#Normal#250#100
+Extreme Speed#Normal#80#100
+Fake Out#Normal#40#100
+False Swipe#Normal#40#100
+Ember#Fire#40#100
+Eruption#Fire#150#100
+Fire Blast#Fire#110#85
+Flame Charge#Fire#50#100
+Flame Wheel#Fire#60#100
+Flamethrower#Fire#90#100
